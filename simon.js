@@ -21,7 +21,7 @@ $(".btn").click(function () {
     userClickedPattern.push(userChosenColor);
     //    console.log(userClickedPattern);
     playsound(userChosenColor);
-    animateClick(userChosenColor)
+    animateClick(userChosenColor);
 
     checkAnswer(userClickedPattern.length - 1);
 });
@@ -35,11 +35,18 @@ function checkAnswer(currentLevel) {
             setTimeout(function () {
                 nextSequence();
             }, 1000);
-        } else {
+        }} else {
             console.log("wrong pattern");
-        }
-    }
-}
+            playsound("wrong");
+
+            $("body").addClass("game-over");
+            setTimeout(function() {
+                $("body").removeClass("game-over");
+        },200);
+
+        $("#level-title").text("Game Over, Press Any Key to Restart");
+        startOver();
+    }}
 
 function nextSequence() {
     userClickedPattern = [];
@@ -70,4 +77,10 @@ function animateClick(currentColor) {
         $("#" + currentColor).removeClass("pressed");
     }, 100);
 
+}
+
+function startOver(){
+    level =0;
+    gamePattern = [];
+    started = false;
 }
